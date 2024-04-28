@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <style>
+      :root {
+        color-scheme: dark light;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      h1,
+      h3 {
+        text-align: center;
+      }
+
+      .wrapper {
+        margin-top: 4rem;
+        gap: 1rem;
+        padding-inline: auto;
+      }
+
+      .container {
+        margin: 2rem;
+        text-align: center;
+        padding-inline: auto;
+      }
+
+      form {
+        display: inline-block;
+        text-align: center;
+      }
+
+      input,
+      button {
+        font-size: 125%;
+      }
+
+      input {
+        width: 80%;
+        background-color: aliceblue;
+        border: 7px groove rgba(164, 0, 0, 0.41);
+        margin-bottom: 1rem;
+        padding: 0.2rem;
+        text-align: center;
+        color: black;
+      }
+
+      button {
+        border-top: 1px solid #96d1f8;
+        background: #2987c6;
+        padding: 5.5px 11px;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
+        color: white;
+        text-decoration: none;
+        vertical-align: middle;
+      }
+      button:hover {
+        border-top-color: #28597a;
+        background: #28597a;
+        color: #eeeeee;
+      }
+      button:active {
+        border-top-color: #1b435e;
+        background: #ffbf00;
+        color: #ffff;
+      }
+
+      .icon {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .map-container {
+        padding-inline: auto;
+        text-align: center;
+      }
+
+      footer {
+        position: sticky;
+        top: 100vh;
+        top: 100dvh;
+        width: 100%;
+        text-align: center;
+        margin-top: 5rem;
+      }
+
+      /* テーブルのスタイル */
+      #tables {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2.5rem;
+      }
+
+      #sum {
+        flex-basis: 0;
+      }
+
+      #sum td {
+        height: 2.5rem;
+      }
+
+      #air {
+        flex-basis: 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        text-align: center;
+        table-layout: fixed;
+      }
+      td {
+        padding: 0 0.5rem;
+        border: 0.5px solid rgb(169, 167, 167);
+      }
+
+      #sum tr:nth-child(odd) {
+        background-color: #a2a2a266;
+      }
+      #air tr:nth-child(even) {
+        background-color: #a2a2a266;
+      }
+      #air tr:nth-child(1) {
+        background-color: #a2a2a266;
+      }
+    </style>
+    <title>World Weather</title>
+  </head>
+  <body>
+    <h1 class="title">World Weather</h1>
+    <h3>What's the weather like?</h3>
+    <div class="wrapper">
+        <div class="map-container">
+            <figure>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d53384321.30294707!2d-16.33091819997563!3d35.24828425140677!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sjp!4v1714301359514!5m2!1sen!2sjp"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            </figure>
+        </div>
+        <div class="container">
+            <form
+            hx-post="/weather"
+            hx-target="#weather-result"
+            hx-swap="innerHTML"
+            >
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="英語で都市名や国名を入力"
+                />
+                <button type="submit">GET Weather</button>
+            </form>
+            <div id="weather-result">
+                <h4 style="margin-top: 3rem;">{{.Location.Name}}</h4>
+                <small>Local time: {{.Location.LocalTime}}</small>
+                <div class="icon">
+                    <img src="{{.Current.Condition.Icon}}" alt="{{.Current.Condition.Text}}" />
+                    <p>{{.Current.Condition.Text}}</p>
+                </div>  
+                <p>...Since the late 19th century, the Royal Observatory is the historic source of the Prime Meridian of the world, Longitude 0° 0' 0''. The world prime meridian marks the divide between the eastern and western hemispheres<a href="https://www.rmg.co.uk/royal-observatory/history" target="_blank">.....show "ROYAL MUSEUMS GREENWICH" web page</a></p>
+            </div>
+        </div>
+    </div>
+    <footer>
+      <p>© 2024 -ForestallingEI- All rights reserved.</p>
+    </footer>
+  </body>
+</html>

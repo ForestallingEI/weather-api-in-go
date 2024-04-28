@@ -1,0 +1,89 @@
+<h3 style="font-style: italic">{{.Location.Name}}</h3>
+<small>Local time: {{.Location.LocalTime}}</small>
+<h4>{{.Location.Region}}</h4>
+<small
+>Latitude: {{.Location.Lat}}, Longitude: {{.Location.Lat}}</small
+>
+<h4>{{.Location.Country}}</h4>
+<div class="icon">
+<img
+    src="{{.Current.Condition.Icon}}"
+    alt="{{.Current.Condition.Text}}"
+/>
+<p>{{.Current.Condition.Text}}</p>
+</div>
+<small>Last updated: {{.Current.LastUpdated}}</small>
+<div id="tables">
+<table id="sum">
+    <tbody>
+    <tr>
+        <td>Tempreture</td>
+        <td>Feels like temperature</td>
+        <td>Cloud cover</td>
+        <td>Precipitation amount</td>
+        <td>Humidity</td>
+        <td>Pressure</td>
+    </tr>
+    <tr>
+        <td>{{.Current.TempC}} ℃</td>
+        <td>{{.Current.FeelslikeC}} ℃</td>
+        <td>{{.Current.Cloud}} %</td>
+        <td>{{.Current.PrecipMm}} mm</td>
+        <td>{{.Current.Humidity}} %</td>
+        <td>{{.Current.PressureMB}} mb</td>
+    </tr>
+    <tr>
+        <td>Visibility</td>
+        <td><a href="https://en.wikipedia.org/wiki/Ultraviolet_index" target="_blank">UV index</a></td>
+        <td>Wind speed</td>
+        <td>Wind direction</td>
+        <td>Wind gust</td>
+    </tr>
+    <tr>
+        <td>{{.Current.VisKM}} km</td>
+        <td>{{.Current.UV}}</td>
+        <td>{{.Current.WindKph}} km/h</td>
+        <td>{{.Current.WindDir}}</td>
+        <td>{{.Current.GustKph}} km/h</td>
+    </tr>
+    </tbody>
+</table>
+<table id="air">
+    <tbody>
+    <tr>
+        <td colspan="4">Air quality</td>
+    </tr>
+    <tr>
+        <td>CO</td>
+        <td>NO2</td>
+        <td>O3</td>
+        <td>SO2</td>
+    </tr>
+    <tr>
+        <td>{{.Current.AirQuality.Co}} μg/m3</td>
+        <td>{{.Current.AirQuality.No2}} μg/m3</td>
+        <td>{{.Current.AirQuality.O3}} μg/m3</td>
+        <td>{{.Current.AirQuality.So2}} μg/m3</td>
+    </tr>
+    <tr>
+        <td>PM2.5</td>
+        <td>PM10</td>
+        <td>US - EPA standard</td>
+        <td><a href="https://uk-air.defra.gov.uk/air-pollution/daqi" target="_blank">UK Defra Index</a></td>
+    </tr>
+    <tr>
+        <td>{{.Current.AirQuality.Pm25}} μg/m3</td>
+        <td>{{.Current.AirQuality.Pm10}} μg/m3</td>
+        <td>{{.Current.AirQuality.UsEpaIndex}}</td>
+        <td>{{.Current.AirQuality.GbDefraIndex}}</td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    reference:
+    <a href="https://www.weatherapi.com/docs/"
+    >https://www.weatherapi.com/docs/</a
+    >
+</p>
+</div>
+
